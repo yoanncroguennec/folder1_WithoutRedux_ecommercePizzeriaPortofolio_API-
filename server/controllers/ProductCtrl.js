@@ -51,7 +51,7 @@ exports.getAllProducts = async (req, res, next) => {
         const skip = (pageRequired - 1) * limit;
 
 
-        const results = await Product.find(filters)
+        const products = await Product.find(filters)
             .sort(sortFilter)
             .skip(skip)
             .limit(limit)
@@ -59,7 +59,7 @@ exports.getAllProducts = async (req, res, next) => {
 
 
         res.status(201).json({
-            results
+            products
         }) 
     } catch (error) {
         res.status(400).json({ message: error.message });
