@@ -33,7 +33,7 @@ app.use('/api/products', require('../server/routes/Products.Routes'))
 // app.use('/api/restaurants', require('../server/routes/Restaurants.Routes'))
 
 
-app.post("/payment", async (req, res) => {
+app.post("/api/payment", async (req, res) => {
   try {
     // console.log(req.body);
     // Je reçois un token du front
