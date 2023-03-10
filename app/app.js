@@ -36,14 +36,15 @@ app.use('/api/restaurants', require('../server/routes/Restaurants.Routes'))
 app.post("/api/payment", cors(), async (req, res) => {
   let { amount, id } = req.body
   console.log("amount & id :", amount, id);
-
+const stripeToken = req.body.stripeToken;
   try {
-    const payement = await stripe.payementIntents.create({
-      amount: amount,
+    const payement = await stripe.charges.create({
+      amount: 2000,
       currency: "eur",
       description: "La description de l'objet acheté",
-      payement_method: id,
-      confirm: true,
+      // payement_method: id,
+      // confirm: true,
+      source: stripeToken,
     })
     res.json({
       message: "Payement réussi",
@@ -56,26 +57,7 @@ app.post("/api/payment", cors(), async (req, res) => {
       success: false,
     })   
   }
-
-  // try {
-  //   // console.log(req.body);
-  //   // Je reçois un token du front
-  //   const stripeToken = req.body.stripeToken;
-  //   // Je fais une requête à stripe pour créer un paiement
-  //   const responseFromStripe = await stripe.charges.create({
-  //     amount: 2000,
-  //     currency: "eur",
-  //     description: "La description de l'objet acheté",
-  //     source: stripeToken,
-  //   });
-  //   // Si le paiement est effectué, on met à jour l'offre et on renvoie au front le fait que tout s'est bien passé
-  //   console.log(responseFromStripe);
-  //   // Je renvoie au client le status de la réponse de stripe
-  //   res.json(responseFromStripe.status);
-  // } catch (error) {
-  //   res.status(400).json({ message: error.message });
-  // }
-});
+})
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "This routes doesn't exist" });
