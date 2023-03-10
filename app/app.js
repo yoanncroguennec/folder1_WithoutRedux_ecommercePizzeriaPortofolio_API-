@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 app.use('/api/auth', require('../server/routes/Auth.Routes'))
 app.use('/api/users', require('../server/routes/Users.Routes'))
 app.use('/api/products', require('../server/routes/Products.Routes'))
-// app.use('/api/restaurants', require('../server/routes/Restaurants.Routes'))
+app.use('/api/restaurants', require('../server/routes/Restaurants.Routes'))
 
 
 app.post("/api/payment", cors(), async (req, res) => {
