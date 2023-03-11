@@ -8,7 +8,7 @@ const {
 const { isAuthenticated } = require('../middlewares/auth/Auth')
 
 router.route('/').get(allUsers)
-router.route('/me').get(getUserProfile)
+router.route('/me').get(isAuthenticated, getUserProfile)
 
 
 module.exports = router;
